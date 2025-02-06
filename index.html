@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 15px;
+                box-sizing: border-box;
+            }
+            @media screen and (min-width: 600px) {
+                body {
+                    max-width: 600px;
+                    padding: 20px;
+                }
+            }
+            .form-group {
+                margin-bottom: 15px;
+                width: 100%;
+            }
+            label {
+                display: block;
+                margin-bottom: 5px;
+                font-size: 16px;
+            }
+            input, select {
+                width: 100%;
+                padding: 12px 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 16px;
+                -webkit-appearance: none;
+                appearance: none;
+            }
+            button {
+                background-color: #4CAF50;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                width: 100%;
+                font-size: 16px;
+                -webkit-tap-highlight-color: transparent;
+            }
+            button:hover {
+                background-color: #45a049;
+            }
+            @media (hover: none) {
+                button:hover {
+                    background-color: #4CAF50;
+                }
+            }
+        </style>
+    </head>
+    <body>
+            <div style="background-color: #4CAF50; color: white; padding: 15px; margin: -20px -20px 20px -20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <h1 style="margin: 0; font-size: 28px; text-align: center; color: #ffffff; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); font-weight: bold;">MULLICK BISCUIT CO.</h1>
+                <h2 style="margin: 5px 0 0 0; font-size: 20px; text-align: center; color: #808080;">Bread Production Calculator</h2>
+            </div>
+            <form id="dynamicForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name" style="font-family: 'Bangla', Arial, sans-serif; font-weight: bold; font-size: 18px;">পাউন্ড :</label>
+                    <input type="number" id="pound" name="pound" required>
+                </div>
+                <div class="form-group">
+
+                    <label for="half" style="font-family: 'Bangla', Arial, sans-serif; font-weight: bold; font-size: 18px;">হাফ :</label>
+                    <input type="number" id="half" name="half" required>
+                </div>
+                <div class="form-group">
+                    <label for="quarter" style="font-family: 'Bangla', Arial, sans-serif; font-weight: bold; font-size: 18px;">কোয়াটার :</label>
+                    <input type="number" id="quarter" name="quarter" required>
+                </div>
+                <div class="form-group">
+                    <label for="forasi" style="font-family: 'Bangla', Arial, sans-serif; font-weight: bold; font-size: 18px;">ফরাসি :</label>
+                    <input type="number" id="forasi" name="forasi" required>
+                </div>
+                <div class="form-group">
+                    <label for="twist" style="font-family: 'Bangla', Arial, sans-serif; font-weight: bold; font-size: 18px;">টুইস্ট :</label>
+                    <input type="number" id="twist" name="twist" required>
+                </div>
+                <div class="form-group">
+                    <label for="cd" style="font-family: 'Bangla', Arial, sans-serif; font-weight: bold; font-size: 18px;">C.D. :</label>
+                    <input type="number" id="cd" name="cd" required>
+                </div>
+                <button type="submit" style="font-weight: bold; font-size: 18px;">Submit</button>
+            </form>
+            
+            <!-- Add results section -->
+            <div id="results" style="margin-top: 20px; display: none;">
+                <h3 style="font-family: 'Bangla', Arial, sans-serif; color: #4CAF50; text-align: center;">ফলাফল</h3>
+                <div style="border: 1px solid #ddd; padding: 15px; border-radius: 4px;">
+                    <p id="date" style="font-family: 'Bangla', Arial, sans-serif; font-size: 24px; margin: 5px 0; font-weight: bold;"></p>
+                    <p id="plain" style="font-family: 'Bangla', Arial, sans-serif; font-size: 24px; margin: 5px 0; font-weight: bold;"></p>
+                    <p id="mishti" style="font-family: 'Bangla', Arial, sans-serif; font-size: 24px; margin: 5px 0; font-weight: bold;"></p>
+                    <hr style="margin: 10px 0; border: none; height: 1px; background-color: #ddd;">
+                    <p id="total" style="font-family: 'Bangla', Arial, sans-serif; font-size: 24px; margin: 5px 0; font-weight: bold;"></p>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div style="display: flex; justify-content: start;">
+                        <div style="display: flex; flex-direction: column; justify-content: space-between; min-width: 200px;">
+                            <p id="pa" style="font-family: 'Bangla', Arial, sans-serif; font-size: 24px; margin: 5px 0; font-weight: bold; display: flex; justify-content: space-between;">
+                                <span>পা:</span>
+                                <span style="font-weight: normal"></span>
+                            </p>
+                            <p id="half_result" style="font-family: 'Bangla', Arial, sans-serif; font-size: 24px; margin: 5px 0; font-weight: bold; display: flex; justify-content: space-between;">
+                                <span>হাফ:</span>
+                                <span style="font-weight: normal"></span>
+                            </p>
+                            <p id="quarter_result" style="font-family: 'Bangla', Arial, sans-serif; font-size: 24px; margin: 5px 0; font-weight: bold; display: flex; justify-content: space-between;">
+                                <span>কো:</span>
+                                <span style="font-weight: normal"></span>
+                            </p>
+                        </div>
+                        <div style="width: 1px; background-color: #000; margin: 0 10px;"></div>
+                        <div style="min-width: 200px;">
+                            <p id="new_result1" style="font-family: 'Bangla', Arial, sans-serif; font-size: 24px; margin: 5px 0; font-weight: bold;"></p>
+                            <p id="new_result2" style="font-family: 'Bangla', Arial, sans-serif; font-size: 24px; margin: 5px 0; font-weight: bold;"></p>
+                        </div>       
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <div style="display: flex; justify-content: start;">
+                    <div style="display: flex; flex-direction: column; justify-content: space-between; min-width: 200px;">
+                        <p id="fo" style="font-family: 'Bangla', Arial, sans-serif; font-size: 24px; margin: 5px 0; font-weight: bold; display: flex; justify-content: space-between;">
+                            <span>ফরাসি:</span>
+                            <span style="font-weight: normal"></span>
+                        </p>
+                        <p id="tw" style="font-family: 'Bangla', Arial, sans-serif; font-size: 24px; margin: 5px 0; font-weight: bold; display: flex; justify-content: space-between;">
+                            <span>টুইস্ট:</span>
+                            <span style="font-weight: normal"></span>
+                        </p>
+                        <p id="c.d." style="font-family: 'Bangla', Arial, sans-serif; font-size: 24px; margin: 5px 0; font-weight: bold; display: flex; justify-content: space-between;">
+                            <span>C.D.:</span>
+                            <span style="font-weight: normal"></span>
+                        </p>
+                    </div>
+                    <div style="width: 1px; background-color: #000; margin: 0 10px;"></div>
+                    <div style="min-width: 200px;">
+                        <p id="real_mishti" style="font-family: 'Bangla', Arial, sans-serif; font-size: 24px; margin: 5px 0; font-weight: bold;"></p>
+                        <p id="real_sweet" style="font-family: 'Bangla', Arial, sans-serif; font-size: 24px; margin: 5px 0; font-weight: bold;"></p>
+                    </div>       
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            </div>
+
+            <script>
+
+                function handleSubmit(event) {
+                    event.preventDefault();
+                    const formData = new FormData(event.target);
+                    const data = Object.fromEntries(formData);
+                    
+                    const plain = Math.floor((Number(data.pound) + Number(data.half) + Number(data.quarter)) / 4) ;
+                    const mishti = Math.floor((Number(data.forasi) / 4.5) + ((Number(data.twist) + Number(data.cd)) * 12 / 14));
+                    const total = Number(plain) + Number(mishti);
+                    const pa = (Number(data.pound) / 4);
+                    const half = (Number(data.half) / 4);
+                    const quarter = (Number(data.quarter) / 6);
+
+                    
+                    // Calculate results
+// Assuming 85% flour requirement
+                    
+                    // Display results
+                    document.getElementById('results').style.display = 'block';
+                    const days = ['রবিবার', 'সোমবার', 'মঙ্গলবার', 'বুধবার', 'বৃহস্পতিবার', 'শুক্রবার', 'শনিবার'];
+                    const today = new Date();
+                    document.getElementById('date').textContent = `${days[today.getDay()]}\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0${today.toLocaleDateString()}`;
+                    document.getElementById('date').innerHTML = `<span style="text-decoration: underline">${days[today.getDay()]}</span>\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<span style="text-decoration: underline">${today.getDate().toString().padStart(2,'0')}/${(today.getMonth()+1).toString().padStart(2,'0')}/${today.getFullYear().toString().slice(-2)}</span>`;
+                    document.getElementById('plain').innerHTML = `প্লেন :\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<span style="font-weight: normal">${plain}\u00A0KG</span>\u00A0-`;
+                    document.getElementById('mishti').innerHTML = `মিষ্টি :\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<span style="font-weight: normal">${mishti}\u00A0KG</span>\u00A0-`;
+                    document.getElementById('total').innerHTML = `মোট :\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0<span style="font-weight: normal">${total}\u00A0KG</span>\u00A0-`;
+
+                    document.getElementById('pa').querySelector('span:last-child').textContent = `${pa} ডিস`;
+                    document.getElementById('half_result').querySelector('span:last-child').textContent = `${half} ডিস`;
+                    document.getElementById('quarter_result').querySelector('span:last-child').textContent = `${quarter} ডিস`;
+                    document.getElementById('new_result1').innerHTML = `${((Number(data.pound) + Number(data.half) + Number(data.quarter)) / 4).toFixed(1)}00\u00A0\u00A0ময়দা`;
+                    document.getElementById('new_result2').innerHTML = `<span style="color: darkcyan">${(((Number(data.pound) + Number(data.half) + Number(data.quarter)) / 4).toFixed(1) * 0.125).toFixed(1)}00\u00A0\u00A0চিনি</span>`;
+
+                    document.getElementById('fo').querySelector('span:last-child').textContent = `${(Number(data.forasi))} প্যা:`;
+                    document.getElementById('tw').querySelector('span:last-child').textContent = `${(Number(data.twist))} ডজন`;
+                    document.getElementById('c.d.').querySelector('span:last-child').textContent = `${(Number(data.cd))} ডজন `;
+                    document.getElementById('real_mishti').innerHTML = `${((Number(data.forasi) / 4.5) + ((Number(data.twist) + Number(data.cd)) * 12 / 14)).toFixed(1)}00\u00A0\u00A0ময়দা`;
+                    document.getElementById('real_sweet').innerHTML = `<span style="color: darkcyan">${(((Number(data.pound) + Number(data.half) + Number(data.quarter)) / 4).toFixed(1) * 0.2).toFixed(1)}00\u00A0\u00A0চিনি</span>`;
+                }
+            </script>
+    </body>
+
+
+</html>
